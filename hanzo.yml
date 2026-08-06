@@ -1,0 +1,12 @@
+# fsevents — NO GATE EXISTS ON THIS FLEET, and saying so is the honest
+# declaration.
+#
+# This is a darwin-only native module: package.json declares `os: [darwin]`, so
+# npm refuses to install it at all on linux (EBADPLATFORM), and binding.gyp
+# declares its targets under `OS=="mac"` — meaning `npm run build` on linux runs
+# node-gyp over ZERO targets and exits 0 having built nothing. Every test in
+# test/ requires the compiled fsevents.node. A `test:` block here could only be
+# one of those two lies, so there is none: the run instead carries the
+# workflow's own "this build was NOT tested" warning, plus the structural
+# invariants (ignoretracked / modsize / conflictmarkers) that gate every repo.
+# It becomes gateable the day the fleet has a darwin runner.
